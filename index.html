@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Task tracker</title>
+
+    <!-- UIMINI CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uimini@2.0.8/dist/uimini.min.css" />
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- VUE -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+<body class="ui-body">
+    <!-- vue app start -->
+    <div id="app" class="ui-wrapper wrapper">
+        <header class="container">
+            Your pocket task tracker
+        </header>
+        <div class="container ui-container">
+            <form @submit.prevent="handleSubmit" class="ui-form form">
+                <input class="iu-input" type="text" v-model="input.value" :placeholder="input.placeholder" required aria-required="true">
+                <button class="ui-button isPrimary">Add</button>
+            </form>
+            <section class="ui-section list-section">
+                <ul class="list" v-if="tasks.length">
+                    <li v-for="task in tasks" :key="task.id">
+                        <p>
+                            {{task.name}}
+                        </p>
+                        <button class="ui-button isWarning button-remove" @click="handleRemove(task.id)">&#10005;</button>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+     <!-- vue app end -->
+    <script src="./app.js"></script>
+</body>
+</html>
