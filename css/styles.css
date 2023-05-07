@@ -32,10 +32,22 @@
 
 .list li {
     display: flex;
-    align-items: center;
     gap: 12px;
 }
 
-.button-remove {
-    margin-left: auto;
+.list li > *:first-child {
+    width: 100%;
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-right: auto;
+}
+
+.list li form input {
+    width: 100%;
+}
+
+.task-title {
+    margin-right: auto;
 }

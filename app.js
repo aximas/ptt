@@ -7,6 +7,7 @@ const App = {
         return {
             input: {
                 value: '',
+                tempValue: '',
                 placeholder: 'Add some task'
             },
             tasks: []
@@ -27,7 +28,8 @@ const App = {
             const newTask = {
                     id,
                     name,
-                    isDone: false
+                    isDone: false,
+                    isEdit: false
                 };
             this.tasks.push(newTask);
             this.input.value = ''
@@ -38,9 +40,36 @@ const App = {
         const filteredTasks = this.tasks.filter(task => task.id !== id);
         this.tasks = filteredTasks;
       },
+      // edit Task
+      handleEdit(id, name) {
+        this.input.tempValue = name;
+
+        const changedTasks = this.tasks.map(task => {
+            if(task.id === id) {
+              return {...task, isEdit: true}
+            } 
+            return {...task, isEdit: false}
+        })
+
+        this.tasks = changedTasks;
+      },
+      // save edited Task
+      handleSave(id) {
+        const changedName = this.input.tempValue;
+
+        const changedTasks = this.tasks.map(task => {
+            if(task.id === id) {
+              return {...task, isEdit: false, name: changedName}
+            } 
+            return {...task, isEdit: false}
+        });
+
+        this.tasks = changedTasks;
+      }
     },
     watch: {
         tasks: {
+            // save edited Tasks in Local storage
             handler(updatedTasks) {
                 localStorage.setItem('tasks', JSON.stringify(updatedTasks))
             },

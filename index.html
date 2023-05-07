@@ -30,10 +30,17 @@
             <section class="ui-section list-section">
                 <ul class="list" v-if="tasks.length">
                     <li v-for="task in tasks" :key="task.id">
-                        <p>
-                            {{task.name}}
-                        </p>
-                        <button class="ui-button isWarning button-remove" @click="handleRemove(task.id)">&#10005;</button>
+                        <form @submit.prevent="handleSave(task.id, false)" v-if="task.isEdit">
+                            <input class="iu-input" type="text" v-model="input.tempValue"> 
+                            <button class="ui-button isSuccess button-save">Save</button>
+                        </form>
+                        <div v-else>
+                            <p class="task-title">
+                                {{task.name}}
+                            </p>
+                            <button class="ui-button isWarning button-edit" @click="handleEdit(task.id, task.name)">Edit</button>
+                        </div>
+                        <button class="ui-button isDangerous button-remove" @click="handleRemove(task.id)">&#10005;</button>
                     </li>
                 </ul>
             </section>
