@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue Task tracker</title>
+    <title>Pocket Task tracker</title>
 
     <!-- UIMINI CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uimini@2.0.8/dist/uimini.min.css" />
@@ -20,7 +20,9 @@
     <!-- vue app start -->
     <div id="app" class="ui-wrapper wrapper">
         <header class="container">
-            Your pocket task tracker
+            <h1 class="ui-title-3 title">
+                Your pocket task tracker
+            </h1>
         </header>
         <div class="container ui-container">
             <form @submit.prevent="handleSubmit" class="ui-form form">
@@ -35,12 +37,13 @@
                             <button class="ui-button isSuccess button-save">Save</button>
                         </form>
                         <div v-else>
-                            <p class="task-title">
+                            <p class="task-title" :class="{'task-title-checked': task.isDone}">
                                 {{task.name}}
                             </p>
                             <button class="ui-button isWarning button-edit" @click="handleEdit(task.id, task.name)">Edit</button>
+                            <button class="ui-button isDangerous button-remove" @click="handleRemove(task.id)">&#10005;</button>
+                            <button class="ui-button isDefault" :class="{'button-checked': task.isDone, 'isSuccess': task.isDone}" @click="handleChecked(task.id)">&#10004;</button>
                         </div>
-                        <button class="ui-button isDangerous button-remove" @click="handleRemove(task.id)">&#10005;</button>
                     </li>
                 </ul>
             </section>

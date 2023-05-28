@@ -1,5 +1,6 @@
 .wrapper {
     height: 100%;
+    padding: 15px 0;
 } 
 
 .container {
@@ -12,7 +13,7 @@
 }
 
 .form {
-    max-width: 280px;
+    max-width: 325px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -20,7 +21,7 @@
 }
 
 .list-section {
-    max-width: 280px;
+    max-width: 325px;
     width: 100%;
 }
 
@@ -40,7 +41,7 @@
     justify-content: flex-end;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 4px;
     margin-right: auto;
 }
 
@@ -50,4 +51,12 @@
 
 .task-title {
     margin-right: auto;
+}
+
+.task-title-checked {
+   color: #888;
+}
+
+.button-checked {
+    color: #f6f6f6
 }

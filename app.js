@@ -65,6 +65,12 @@ const App = {
         });
 
         this.tasks = changedTasks;
+      },
+      handleChecked(id) {
+        this.tasks = this.tasks.map(task => {
+          if(task.id === id) return {...task, isDone: !task.isDone}
+          return task;
+        })
       }
     },
     watch: {
