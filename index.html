@@ -15,6 +15,18 @@
     <!-- VUE -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
+    <link rel="manifest" href="manifest.json" />
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="images/icons/check-list_72.png" />
+    <link rel="apple-touch-icon" href="images/icons/check-list_96.png" />
+    <link rel="apple-touch-icon" href="images/icons/check-list_128.png" />
+    <link rel="apple-touch-icon" href="images/icons/check-list_144.png" />
+    <link rel="apple-touch-icon" href="images/icons/check-list_152.png" />
+    <link rel="apple-touch-icon" href="images/icons/check-list_192.png" />
+    <link rel="apple-touch-icon" href="images/icons/check-list_384.png" />
+    <link rel="apple-touch-icon" href="images/icons/check-list_512.png" />
+    <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
+    <meta name="theme-color" content="#db4938" />
 </head>
 <body class="ui-body">
     <!-- vue app start -->
@@ -50,6 +62,16 @@
         </div>
     </div>
      <!-- vue app end -->
-    <script src="./app.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function() {
+                navigator.serviceWorker
+                .register("/serviceWorker.js")
+                .then(res => console.log("service worker registered"))
+                .catch(err => console.log("service worker not registered", err))
+            })
+            }
+    </script>
 </body>
 </html>
