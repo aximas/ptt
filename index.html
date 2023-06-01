@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uimini@2.0.8/dist/uimini.min.css" />
     
     <!-- CSS -->
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/style.css" />
 
     <!-- VUE -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -38,7 +38,7 @@
         </header>
         <div class="container ui-container">
             <form @submit.prevent="handleSubmit" class="ui-form form">
-                <input class="iu-input" type="text" v-model="input.value" :placeholder="input.placeholder" required aria-required="true">
+                <input class="iu-input input-task" type="text" v-model="input.value" :placeholder="input.placeholder" required aria-required="true">
                 <button class="ui-button isPrimary">Add</button>
             </form>
             <section class="ui-section list-section">
@@ -52,8 +52,8 @@
                             <p class="task-title" :class="{'task-title-checked': task.isDone}">
                                 {{task.name}}
                             </p>
-                            <button class="ui-button isWarning button-edit" @click="handleEdit(task.id, task.name)">Edit</button>
-                            <button class="ui-button isDangerous button-remove" @click="handleRemove(task.id)">&#10005;</button>
+                            <button v-if="!task.isDone" class="ui-button isWarning button-edit" @click="handleEdit(task.id, task.name)">Edit</button>
+                            <button title="Remove" v-if="task.isDone" class="ui-button isDangerous button-remove" @click="handleRemove(task.id)">&#10005;</button>
                             <button class="ui-button isDefault" :class="{'button-checked': task.isDone, 'isSuccess': task.isDone}" @click="handleChecked(task.id)">&#10004;</button>
                         </div>
                     </li>
@@ -64,14 +64,17 @@
      <!-- vue app end -->
     <script src="js/app.js"></script>
     <script>
-        if ("serviceWorker" in navigator) {
-            window.addEventListener("load", function() {
-                navigator.serviceWorker
-                .register("js/serviceWorker.js")
-                .then(res => console.log("service worker registered"))
-                .catch(err => console.log("service worker not registered", err))
-            })
+        window.addEventListener('load', async () => {
+            if("serviceWorker" in navigator) {
+                try {
+                    const worker = await navigator.serviceWorker.register("/serviceWorker.js");
+                    console.log("service worker registered", worker);
+                }
+                catch(e) {
+                    console.log("service worker not registered", e)
+                }
             }
+        })
     </script>
 </body>
 </html>
